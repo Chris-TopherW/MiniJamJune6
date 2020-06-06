@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectOneAudio : MonoBehaviour
+public class ObjectTwoAudio : MonoBehaviour
 {
 	[Range(0, 16)]
 	public int ExtNotesModulo = 16;
@@ -40,9 +40,9 @@ public class ObjectOneAudio : MonoBehaviour
 
 			fun void playMelody()
 			{
-				[72, 75, 0, 72, 75, 0, 72, 70, 68, 0, 70, 72, 0, 77, 0, 70] @=> int p0Ch0Pr0[];
+				[0, 75, 77, 0, 75, 77, 0, 77, 75, 77, 0, 75, 72, 0, 77, 0] @=> int p1Ch0Pr0[];
 
-				TriOsc s0 => ADSR env0 => Crusher crusher => LPF filter => dac;
+				TriOsc s1 => ADSR env0 => Crusher crusher => LPF filter => dac;
 
 				50::ms => dur decay;
 				90::ms => dur NoteLength;
@@ -50,7 +50,7 @@ public class ObjectOneAudio : MonoBehaviour
 				crusher.SetBitDepth(4);
 				4000 => filter.freq;
 
-				0.4 => s0.gain;
+				0.4 => s1.gain;
 
 			 	while(true)
 			 	{
@@ -58,10 +58,10 @@ public class ObjectOneAudio : MonoBehaviour
 			 		
 			 		for(0 => int i; i < sNotesModulo; i++)
 				    {
-				    	if(p0Ch0Pr0[i] == 0.0) 0.0 => s0.gain;
-						else 0.4 => s0.gain;
+						if(p1Ch0Pr0[i] == 0.0) 0.0 => s1.gain;
+						else 0.4 => s1.gain;
 
-						Math.mtof(p0Ch0Pr0[i] + sOctave) => s0.freq;
+						Math.mtof(p1Ch0Pr0[i] + sOctave) => s1.freq;
 
 						env0.keyOn();
 						10::ms + decay => now;
