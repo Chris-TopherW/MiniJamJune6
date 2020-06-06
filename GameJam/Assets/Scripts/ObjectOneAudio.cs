@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class ObjectOneAudio : MonoBehaviour
 {
-	[Range(0, 16)]
-	public int ExtNotesModulo = 16;
-
-	[Range(-12, 12)]
-	public int ExtOctave = 0;
+	public AudioManager audioManager;
 
     void Start()
     {
@@ -79,13 +75,13 @@ public class ObjectOneAudio : MonoBehaviour
 
 		");
 
-		GetComponent<ChuckSubInstance>().SetInt( "sNotesModulo", ExtNotesModulo );
-		GetComponent<ChuckSubInstance>().SetInt( "sOctave", ExtOctave );
+		GetComponent<ChuckSubInstance>().SetInt( "sNotesModulo", audioManager.extNotesModulo );
+		GetComponent<ChuckSubInstance>().SetInt( "sOctave", audioManager.extOctave );
     }
 
     void Update()
     {
-    	GetComponent<ChuckSubInstance>().SetInt( "sNotesModulo", ExtNotesModulo );
-    	GetComponent<ChuckSubInstance>().SetInt( "sOctave", ExtOctave );
+    	GetComponent<ChuckSubInstance>().SetInt( "sNotesModulo", audioManager.extNotesModulo );
+    	GetComponent<ChuckSubInstance>().SetInt( "sOctave", audioManager.extOctave );
     }
 }
