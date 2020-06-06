@@ -27,9 +27,12 @@ public class ObjectFourAudio : MonoBehaviour
 				72, 72, 72, 68,
 				68, 68] @=> int p4Ch0Pr0[];
 
-				SawOsc s0 => LPF filter => dac;
+				SawOsc s0 => LPF filter => Chorus chorus => dac;
 
 				4000 => filter.freq;
+				3 => chorus.modFreq;
+				0.05 => chorus.modDepth;
+				0.3 => chorus.mix;
 
 				0.04 => s0.gain;
 
