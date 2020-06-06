@@ -19,17 +19,23 @@ public class ObjectFourAudio : MonoBehaviour
 				50::ms => dur decay;
 				90::ms => dur NoteLength;
 
-				[77, 77, 77, 77, 72, 72, 72, 72, 70, 70, 67, 70] @=> int p4Ch0Pr0[];
+				[77, 77, 77, 77, 
+				77, 77, 77, 72, 
+				72, 72, 72, 72, 
+				72, 72, 70, 70, 
+				70, 70, 70, 70, 
+				72, 72, 72, 68,
+				68, 68] @=> int p4Ch0Pr0[];
 
 				SawOsc s0 => LPF filter => dac;
 
 				4000 => filter.freq;
 
-				0.1 => s0.gain;
+				0.04 => s0.gain;
 
 			 	while(true)
 			 	{
-			 		for(0 => int i; i < 12; i++)
+			 		for(0 => int i; i < 26; i++)
 				    {
 						Math.mtof(p4Ch0Pr0[i] + sOctave) => s0.freq;
 
