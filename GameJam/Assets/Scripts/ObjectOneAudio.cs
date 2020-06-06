@@ -6,7 +6,7 @@ public class ObjectOneAudio : MonoBehaviour
 {
     void Start()
     {
-    	GetComponent<ChuckSubInstance>().RunCode(@"
+    	GetComponent<ChuckSubInstance>().RunCode( @"
     		class Crusher extends Chugen
 			{
 				8 => int bitDepth;
@@ -31,37 +31,39 @@ public class ObjectOneAudio : MonoBehaviour
 			[0, 75, 77, 0, 75, 77, 0, 77, 75, 77, 0, 75, 72, 0, 77, 0] @=> int p1Ch0Pr0[];
 
 			SinOsc s0 => ADSR env0 => Crusher crusher => dac;
-			Phasor s1 => env0 => crusher;
+			SinOsc s1 => env0 => crusher;
 
-			40::ms => dur decay;
+			50::ms => dur decay;
 			90::ms => dur NoteLength;
-			env0.set(10::ms, decay, 0.0, 10::ms);
+			env0.set(10::ms, decay, 0.0, 1::ms);
 			crusher.SetBitDepth(4);
-			0 => int increment;
 
 			0.4 => s0.gain;
 			0.4 => s1.gain;
 
+			16 => int notesModulo;
+
 			while(true)
-			{				
-				if(p0Ch0Pr0[increment] == 0.0) 0.0 => s0.gain;
-				else 0.4 => s0.gain;
-				if(p1Ch0Pr0[increment] == 0.0) 0.0 => s1.gain;
-				else 0.4 => s1.gain;
+			{
+				if(notesModulo > 16) 16 => notesModulo;
 
-				Math.mtof(p0Ch0Pr0[increment]) => s0.freq;
-				Math.mtof(p1Ch0Pr0[increment]) => s1.freq;
+			    for(0 => int i; i < notesModulo; i++)
+			    {
+			    	if(p0Ch0Pr0[i] == 0.0) 0.0 => s0.gain;
+					else 0.4 => s0.gain;
+					if(p1Ch0Pr0[i] == 0.0) 0.0 => s1.gain;
+					else 0.4 => s1.gain;
 
-				env0.keyOn();
-				10::ms + decay => now;
-				env0.keyOff();
-				NoteLength - 10::ms - decay => now;
-				increment++;
-				if(increment >= 16)
-				{
-					0 => increment;
-				}
+					Math.mtof(p0Ch0Pr0[i]) => s0.freq;
+					Math.mtof(p1Ch0Pr0[i]) => s1.freq;
+
+					env0.keyOn();
+					10::ms + decay => now;
+					env0.keyOff();
+					NoteLength - 10::ms - decay => now;
+			    }		
+				
 			}
-		");
+		" );
     }
 }
