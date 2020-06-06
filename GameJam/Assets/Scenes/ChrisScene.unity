@@ -320,8 +320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b409d6d9706b41988cd9e32bd055751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chuckMainInstance: {fileID: 0}
-  spatialize: 0
+  chuckMainInstance: {fileID: 1975792323}
+  spatialize: 1
   persistToNextScene: 0
 --- !u!82 &934582570
 AudioSource:
@@ -610,6 +610,7 @@ GameObject:
   - component: {fileID: 1416883273}
   - component: {fileID: 1416883278}
   - component: {fileID: 1416883277}
+  - component: {fileID: 1416883279}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -703,8 +704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b409d6d9706b41988cd9e32bd055751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chuckMainInstance: {fileID: 0}
-  spatialize: 0
+  chuckMainInstance: {fileID: 1975792323}
+  spatialize: 1
   persistToNextScene: 0
 --- !u!82 &1416883278
 AudioSource:
@@ -802,6 +803,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1416883279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416883272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a31f60d7548c14dfca81e06e2df78d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1635785513
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,8 +922,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b409d6d9706b41988cd9e32bd055751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chuckMainInstance: {fileID: 0}
-  spatialize: 0
+  chuckMainInstance: {fileID: 1975792323}
+  spatialize: 1
   persistToNextScene: 0
 --- !u!82 &1635785519
 AudioSource:
@@ -1257,8 +1270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b409d6d9706b41988cd9e32bd055751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chuckMainInstance: {fileID: 0}
-  spatialize: 0
+  chuckMainInstance: {fileID: 1975792323}
+  spatialize: 1
   persistToNextScene: 0
 --- !u!82 &2091876961
 AudioSource:
