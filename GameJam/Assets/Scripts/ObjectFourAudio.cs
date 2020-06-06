@@ -11,38 +11,57 @@ public class ObjectFourAudio : MonoBehaviour
 
 		GetComponent<ChuckSubInstance>().RunCode( @"
 			
+			16 => global int sNotesModulo;
 			0 => global int sOctave;
+
+			class Crusher extends Chugen
+			{
+				2 => int bitDepth;
+				Math.pow(2, bitDepth) => float bitMultiplier;
+
+				fun void SetBitDepth(int value)
+				{
+					Math.pow(2, value) => bitMultiplier;
+				}
+
+				fun float tick(float input)
+				{
+					input * bitMultiplier => input;
+					input $ int => input;
+					input $ float => input;
+					input / bitMultiplier => input;
+					return input;
+				}
+			}
 
 			fun void playMelody()
 			{
+				[0, 77, 72, 77, 72, 0, 77, 72, 77, 72, 0, 70, 0, 70, 70, 72] @=> int p0Ch0Pr0[];
+
+				TriOsc s0 => ADSR env0 => Crusher crusher => LPF filter => dac;
 
 				50::ms => dur decay;
 				90::ms => dur NoteLength;
-
-				[77, 77, 77, 77, 
-				77, 77, 77, 72, 
-				72, 72, 72, 72, 
-				72, 72, 70, 70, 
-				70, 70, 70, 70, 
-				72, 72, 72, 68,
-				68, 68] @=> int p4Ch0Pr0[];
-
-				SawOsc s0 => LPF filter => Chorus chorus => dac;
-
+				env0.set(10::ms, decay, 0.0, 1::ms);
+				crusher.SetBitDepth(4);
 				4000 => filter.freq;
-				3 => chorus.modFreq;
-				0.05 => chorus.modDepth;
-				0.3 => chorus.mix;
 
-				0.04 => s0.gain;
+				0.4 => s0.gain;
 
 			 	while(true)
 			 	{
-			 		for(0 => int i; i < 26; i++)
+			 		if(sNotesModulo > 16) 16 => sNotesModulo;
+			 		
+			 		for(0 => int i; i < sNotesModulo; i++)
 				    {
-						Math.mtof(p4Ch0Pr0[i] + sOctave) => s0.freq;
+				    	if(p0Ch0Pr0[i] == 0.0) 0.0 => s0.gain;
+						else 0.4 => s0.gain;
 
+						Math.mtof(p0Ch0Pr0[i] + sOctave) => s0.freq;
+
+						env0.keyOn();
 						10::ms + decay => now;
+						env0.keyOff();
 						NoteLength - 10::ms - decay => now;
 					}
 				}
@@ -56,11 +75,13 @@ public class ObjectFourAudio : MonoBehaviour
 
 		");
 
+		GetComponent<ChuckSubInstance>().SetInt( "sNotesModulo", audioManager.extNotesModulo );
 		GetComponent<ChuckSubInstance>().SetInt( "sOctave", audioManager.extOctave );
     }
 
     void Update()
     {
+    	GetComponent<ChuckSubInstance>().SetInt( "sNotesModulo", audioManager.extNotesModulo );
     	GetComponent<ChuckSubInstance>().SetInt( "sOctave", audioManager.extOctave );
     }
 }
