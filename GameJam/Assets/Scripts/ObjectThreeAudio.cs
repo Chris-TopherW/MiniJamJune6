@@ -12,7 +12,6 @@ public class ObjectThreeAudio : MonoBehaviour
 		GetComponent<ChuckSubInstance>().RunCode( @"
 			
 			16 => global int sNotesModulo;
-			0 => global int sOctave;
 
 			class Crusher extends Chugen
 			{
@@ -57,7 +56,7 @@ public class ObjectThreeAudio : MonoBehaviour
 						if(p1Ch0Pr0[i] == 0.0) 0.0 => s1.gain;
 						else 0.4 => s1.gain;
 
-						Math.mtof(p1Ch0Pr0[i] + sOctave) => s1.freq;
+						Math.mtof(p1Ch0Pr0[i]) => s1.freq;
 
 						env0.keyOn();
 						10::ms + decay => now;
@@ -76,12 +75,10 @@ public class ObjectThreeAudio : MonoBehaviour
 		");
 
 		GetComponent<ChuckSubInstance>().SetInt( "sNotesModulo", audioManager.extNotesModulo );
-		GetComponent<ChuckSubInstance>().SetInt( "sOctave", audioManager.extOctave );
     }
 
     void Update()
     {
     	GetComponent<ChuckSubInstance>().SetInt( "sNotesModulo", audioManager.extNotesModulo );
-    	GetComponent<ChuckSubInstance>().SetInt( "sOctave", audioManager.extOctave );
     }
 }
