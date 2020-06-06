@@ -47,7 +47,9 @@ Material:
         m_Texture: {fileID: 2800000, guid: d31e7b37cd11c1fda000e6ba23fd9659, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
+    m_Floats:
+    - _Exposure: 1
+    - _Rotation: 44.726418
     m_Colors:
     - _BackTex_ST: {r: 1, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
