@@ -13,6 +13,9 @@ public class AudioManager : MonoBehaviour
 	[Range(2, 5)]
 	public int extBassDecayMultiplier = 3;
 
+	[Range(1, 5)]
+	public int extBitCrush = 2;
+
 	private float timeSinceLastShift = 0.0f;
 	private float timeOfNextShift = 0.0f;
 
@@ -49,5 +52,6 @@ public class AudioManager : MonoBehaviour
 		timeSinceLastBassShift = 0;
 		timeOfNextBassShift = Time.time + Random.Range(8.0f, 14.0f);
 		extBassDecayMultiplier = Random.Range(2, 5);
+		extBitCrush = Random.Range(1, 4);
 	}
 }

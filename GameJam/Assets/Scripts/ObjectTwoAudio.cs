@@ -12,6 +12,7 @@ public class ObjectTwoAudio : MonoBehaviour
 		GetComponent<ChuckSubInstance>().RunCode( @"
 			
 			16 => global int sNotesModulo;
+			2 => global int sBitcrush;
 
 			class Crusher extends Chugen
 			{
@@ -42,7 +43,6 @@ public class ObjectTwoAudio : MonoBehaviour
 				50::ms => dur decay;
 				90::ms => dur NoteLength;
 				env0.set(10::ms, decay, 0.0, 1::ms);
-				crusher.SetBitDepth(4);
 				4000 => filter.freq;
 
 				0.4 => s1.gain;
@@ -57,6 +57,8 @@ public class ObjectTwoAudio : MonoBehaviour
 						else 0.4 => s1.gain;
 
 						Math.mtof(p1Ch0Pr0[i]) => s1.freq;
+
+						crusher.SetBitDepth(sBitcrush);
 
 						env0.keyOn();
 						10::ms + decay => now;
@@ -75,10 +77,13 @@ public class ObjectTwoAudio : MonoBehaviour
 		");
 
 		GetComponent<ChuckSubInstance>().SetInt( "sNotesModulo", audioManager.extNotesModulo );
+		GetComponent<ChuckSubInstance>().SetInt( "sBitcrush", audioManager.extBitCrush );
     }
 
     void Update()
     {
     	GetComponent<ChuckSubInstance>().SetInt( "sNotesModulo", audioManager.extNotesModulo );
+		GetComponent<ChuckSubInstance>().SetInt( "sBitcrush", audioManager.extBitCrush );
+
     }
 }
