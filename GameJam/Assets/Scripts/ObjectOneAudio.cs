@@ -12,6 +12,11 @@ public class ObjectOneAudio : MonoBehaviour
 				8 => int bitDepth;
 				Math.pow(2, bitDepth) => float bitMultiplier;
 
+				fun void SetBitDepth(int value)
+				{
+					Math.pow(2, value) => bitMultiplier;
+				}
+
 				fun float tick(float input)
 				{
 					input * bitMultiplier => input;
@@ -24,6 +29,7 @@ public class ObjectOneAudio : MonoBehaviour
 
 			SinOsc s => Crusher crusher => dac;
 			440 => s.freq;
+			crusher.SetBitDepth(4);
 
 			while(true)
 			{
